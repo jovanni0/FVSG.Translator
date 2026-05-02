@@ -2,10 +2,14 @@ import processors.CaseProcessor
 import processors.DocumentSplitter
 import processors.NameHarvester
 import processors.PostProcessor
+import processors.PreProcessor
 import processors.PunctuationProcessor
+
+
 
 class Pipeline
 {
+    val pre_processor = PreProcessor()
     val doc_splitter = DocumentSplitter()
     val name_harveser = NameHarvester()
     val punctuation_processor = PunctuationProcessor()
@@ -15,7 +19,9 @@ class Pipeline
 
     fun transform(markdown: String): String
     {
-        var doc = doc_splitter.splitDoc(markdown)
+        val processed = pre_processor.run(markdown)
+
+        var doc = doc_splitter.splitDoc(processed)
 
         val names = name_harveser.run(doc)
         case_processor.setNames(names)
