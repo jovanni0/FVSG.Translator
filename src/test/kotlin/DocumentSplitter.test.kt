@@ -140,5 +140,16 @@ class DocumentSplitterTest
 
             assertEquals(output_size, result.sentences.size)
         }
+
+        @Test
+        fun `don't split lines starting with #`()
+        {
+            val input = "# Chapter One"
+            val output = input
+
+            val result = doc_splitter.splitLine(input)
+
+            assertEquals(output, result.sentences.first().toString())
+        }
     }
 }
