@@ -4,6 +4,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import static kotlin.io.ConsoleKt.readln;
 
 
 
@@ -59,11 +60,19 @@ public class Main
 
 
     private static void confirmAndClearDir(Path dir)
-            throws IOException
+            throws Exception
     {
         if (!Files.exists(dir))
         {
             return;
+        }
+
+        System.out.print("Directory '" + dir.getFileName() + "' exists. Delete it? [y/N]: ");
+        var response = readln();
+
+        if (!response.equalsIgnoreCase("y"))
+        {
+            throw new Exception("Directory " + dir.getFileName() + " already exists.");
         }
 
         deleteDirectoryRecursively(dir);
