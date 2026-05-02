@@ -28,16 +28,19 @@ public class Main
 
             List<String> markdown_files = EpubExtractor.processEpubFile(epubPath, outputDir);
             Pipeline pipeline = new Pipeline();
+
+            System.out.print("Processing chapter: ");
             for (int index = 0; index < markdown_files.size(); index++)
             {
                 String file = markdown_files.get(index);
 
-                System.out.println("\n------ Chapter " + index + "--------" );
+                System.out.print(index + ", ");
                 String fvsg_markdown = pipeline.transform(file);
 
                 saveToFile(fvsg_markdown, outputDir, index);
             }
 
+            System.out.println();
             System.out.println("Extraction complete");
         }
         catch (Exception e)
