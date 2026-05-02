@@ -114,4 +114,33 @@ class PunctuationProcessorTest
             assertEquals(output, result.toString())
         }
     }
+
+
+    @Nested
+    inner class InsertComma
+    {
+        @Test
+        fun `insert comma after question when detecting 'called'`()
+        {
+            val input = "“Going?” LionWalker called over the wind."
+            val output = "“Going?”, LionWalker called over the wind."
+
+            val split = doc_splitter.splitLine(input)
+            val result = punctuation_processor.run(split)
+
+            assertEquals(output, result.toString())
+        }
+
+        @Test
+        fun `insert comma after question when detecting 'asking'`()
+        {
+            val input = "“Don?” Paula was asking."
+            val output = "“Don?”, Paula was asking."
+
+            val split = doc_splitter.splitLine(input)
+            val result = punctuation_processor.run(split)
+
+            assertEquals(output, result.toString())
+        }
+    }
 }
