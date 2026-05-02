@@ -59,7 +59,7 @@ class NameHarvester(
         val names = mutableSetOf<String>()
 
         line.sentences.forEach { sentence ->
-            if (!sentence.words.first().head.contains('#'))
+            if (!sentence.words.first().body.contains('#'))
             {
                 names.addAll(this.run(sentence))
             }
