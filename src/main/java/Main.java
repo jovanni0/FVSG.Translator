@@ -61,6 +61,11 @@ public class Main
     private static void confirmAndClearDir(Path dir)
             throws IOException
     {
+        if (!Files.exists(dir))
+        {
+            return;
+        }
+
         deleteDirectoryRecursively(dir);
         System.out.println("Directory deleted.");
     }
