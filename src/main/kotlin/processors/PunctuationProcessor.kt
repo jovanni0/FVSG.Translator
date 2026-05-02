@@ -105,7 +105,14 @@ class PunctuationProcessor
 
     fun isCurrentSentenceEnding(next_sentence: Sentence): Boolean
     {
-        val special_words = setOf("said", "asked", "yelled")
+        val special_words = setOf(
+            "said",
+            "asked",
+            "yelled",
+            "called",
+            "asking"
+        )
+
         val words = next_sentence.words
 
         if (words.size < 1)
