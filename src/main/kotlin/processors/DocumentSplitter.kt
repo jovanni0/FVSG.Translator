@@ -39,7 +39,12 @@ class DocumentSplitter
 //    }
 
 
-    val end_of_sentence = setOf('.', '?', '!')
+    val end_of_sentence = setOf(
+        '.',
+        '?',
+        '!',
+        '…'
+    )
 
 
     fun splitDoc(doc: String): Document
