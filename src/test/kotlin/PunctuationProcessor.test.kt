@@ -1,3 +1,4 @@
+import org.junit.jupiter.api.Nested
 import processors.DocumentSplitter
 import processors.PunctuationProcessor
 import kotlin.test.Test
@@ -95,5 +96,22 @@ class PunctuationProcessorTest
         val result = punctuation_processor.run(input)
 
         assertEquals("---", result.toString())
+    }
+
+
+    @Nested
+    inner class InserPeriod
+    {
+        @Test
+        fun `insert period after ellipses at sentence end`()
+        {
+            val input = "Afterward… Forget it."
+            val output = "Afterward…. Forget it."
+
+            val split = doc_splitter.splitLine(input)
+            val result = punctuation_processor.run(split)
+
+            assertEquals(output, result.toString())
+        }
     }
 }
