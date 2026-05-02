@@ -1,3 +1,4 @@
+import org.junit.jupiter.api.Nested
 import processors.DocumentSplitter
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -123,5 +124,21 @@ class DocumentSplitterTest
         val result = doc_splitter.splitDoc(doc)
 
         assertEquals(1, result.fragments.size)
+    }
+
+
+    @Nested
+    inner class SplitLine
+    {
+        @Test
+        fun `split when encountering ellipses`()
+        {
+            val input = "Afterward… Forget it."
+            val output_size = 2
+
+            val result = doc_splitter.splitLine(input)
+
+            assertEquals(output_size, result.sentences.size)
+        }
     }
 }
