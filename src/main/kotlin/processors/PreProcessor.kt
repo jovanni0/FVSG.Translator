@@ -49,6 +49,13 @@ class PreProcessor
             .replace(". . .", "…")      // 3B
     }
 
+    /**
+     * handle ellipsis separation. this means adding space after ellipsis character if it is touching the next word after.
+     *
+     * the types of separations are:
+     * - type 1 = the ellipsis is touching the start of speech: `then…“hello`
+     * - type 2 = the ellipsis is touching a regular word: `it…begins`
+     */
     private fun ellipsisSeparation(input: String): String
     {
         return input
