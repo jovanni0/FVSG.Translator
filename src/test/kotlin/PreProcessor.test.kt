@@ -105,5 +105,49 @@ class PreProcessorTest
 
             assertEquals(result, expected)
         }
+
+        @Test
+        fun `type 1 ellipsis separation`()
+        {
+            val value = "I…It"
+            val expected = "I… It"
+
+            val result = preprocessor.run(value)
+
+            assertEquals(expected, result)
+        }
+
+        @Test
+        fun `type 2 ellipsis separation`()
+        {
+            val value = "sinister…“I"
+            val expected = "sinister… “I"
+
+            val result = preprocessor.run(value)
+
+            assertEquals(expected, result)
+        }
+
+        @Test
+        fun `ignore ellipsis at speech end`()
+        {
+            val value = "“But…”"
+            val expected = value
+
+            val result = preprocessor.run(value)
+
+            assertEquals(expected, result)
+        }
+
+        @Test
+        fun `ignore ellipsis followed by space`()
+        {
+            val value = "I… It"
+            val expected = value
+
+            val result = preprocessor.run(value)
+
+            assertEquals(expected, result)
+        }
     }
 }
