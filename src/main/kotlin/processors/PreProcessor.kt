@@ -12,8 +12,9 @@ class PreProcessor
 {
     fun run(doc: String): String
     {
-        val doc = ellipsis(doc)
-        return ellipsisSeparation(doc)
+        return doc
+            .ellipsisCondensation()
+            .ellipsisSeparation()
     }
 
 
@@ -36,9 +37,9 @@ class PreProcessor
      *     - 3A = the SE have a space at the beginning: `text . . .`
      *     - 3B = the SE are not padded: `text. . .`
      */
-    private fun ellipsis(input: String): String
+    private fun String.ellipsisCondensation(): String
     {
-        return input
+        return this
             .replace(" . . . ”", "…”")  // 1A
             .replace(" . . .”", "…”")   // 1B
             .replace("“ . . .", "“…")   // 2A
@@ -49,6 +50,7 @@ class PreProcessor
             .replace(". . .", "…")      // 3B
     }
 
+
     /**
      * handle ellipsis separation. this means adding space after ellipsis character if it is touching the next word after.
      *
@@ -56,9 +58,9 @@ class PreProcessor
      * - type 1 = the ellipsis is touching the start of speech: `then…“hello`
      * - type 2 = the ellipsis is touching a regular word: `it…begins`
      */
-    private fun ellipsisSeparation(input: String): String
+    private fun String.ellipsisSeparation(): String
     {
-        return input
+        return this
             .replace("…“", "… “")
             .replace(Regex("…([a-zA-Z])"), "… $1")
     }
