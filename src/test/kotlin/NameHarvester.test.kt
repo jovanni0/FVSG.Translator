@@ -1,4 +1,5 @@
 import data_types.Word
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertFalse
 import org.junit.jupiter.api.Assertions.assertTrue
 import processors.DocumentSplitter
@@ -203,4 +204,15 @@ class NameHarvesterTest
         assertTrue(names.contains("Cath"))
         assertTrue(names.contains("Alexander"))
     }
+
+        @Test
+        fun `ignore namecase word at speech start`()
+        {
+            val input = "screeched “You”"
+
+            val sentences = doc_splitter.splitLine(input)
+            val names = harvester.run(sentences)
+
+            assertEquals(0, names.size)
+        }
 }
