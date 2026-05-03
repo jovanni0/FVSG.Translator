@@ -67,6 +67,10 @@ class PunctuationProcessor
     fun run(sentence: Sentence, is_ending_hint: Boolean = true): Sentence
     {
         var speech_counter = 0
+        var not_sentence_ends = setOf(
+            ':',
+            ';'
+        )
 
         sentence.words.forEachIndexed { index, word ->
             if (word.head.contains('“'))
@@ -74,14 +78,16 @@ class PunctuationProcessor
                 speech_counter++
             }
 
+            if (word.tail.any { it in not_sentence_ends})
+                return@forEachIndexed
+
             if (index == sentence.words.lastIndex && !word.tail.contains('.'))
             {
                 if (!is_ending_hint)
                 {
+
                     if (word.tail.contains('…'))
-                    {
                         return@forEachIndexed
-                    }
 
                     word.insertComma()
                 }
