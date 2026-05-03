@@ -30,6 +30,8 @@ class PreProcessor
      *     - 2B = the SE have a space at the end: `“. . . we're`
      * - type 3 = generic spread ellipsis in the text. because there is no context about the position in text, it's assumed
      *            they will be collapsed at the end of the previous word. the trainiling space case is ignored.
+     *     - 3A-Q = the SE have space at the beggining + end and a question mark: `this . . . ?`
+     *     - 3A-E = the SE have space at the beggining + end and a exclamation mark: `this . . . !`
      *     - 3A = the SE have a space at the beginning: `text . . .`
      *     - 3B = the SE are not padded: `text. . .`
      */
@@ -40,6 +42,8 @@ class PreProcessor
             .replace(" . . .”", "…”")   // 1B
             .replace("“ . . .", "“…")   // 2A
             .replace("“. . .", "“…")    // 2B
+            .replace(" . . . ?", "…?")     // 3A-Q
+            .replace(" . . . !", "…!")     // 3A-E
             .replace(" . . .", "…")     // 3A
             .replace(". . .", "…")      // 3B
     }
