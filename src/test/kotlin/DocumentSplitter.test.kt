@@ -1,7 +1,9 @@
+import org.junit.jupiter.api.Assertions.assertFalse
 import org.junit.jupiter.api.Nested
 import processors.DocumentSplitter
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertTrue
 
 class DocumentSplitterTest
 {
@@ -150,6 +152,17 @@ class DocumentSplitterTest
             val result = doc_splitter.splitLine(input)
 
             assertEquals(output, result.sentences.first().toString())
+        }
+
+        @Test
+        fun `split when encountering colon`()
+        {
+            val input = "test: No good."
+
+            val result = doc_splitter.splitLine(input)
+
+            assertEquals(2, result.sentences.size)
+            assertEquals("test:", result.sentences.first().toString())
         }
     }
 }
