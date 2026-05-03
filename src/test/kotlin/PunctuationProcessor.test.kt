@@ -142,5 +142,17 @@ class PunctuationProcessorTest
 
             assertEquals(output, result.toString())
         }
+
+        @Test
+        fun `don't insert comma after ellipsis`()
+        {
+            val input = "I'm… done."
+            val output = input
+
+            val split = doc_splitter.splitLine(input)
+            val result = punctuation_processor.run(split)
+
+            assertEquals(output, result.toString())
+        }
     }
 }
