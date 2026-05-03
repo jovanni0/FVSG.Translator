@@ -113,6 +113,18 @@ class PunctuationProcessorTest
 
             assertEquals(output, result.toString())
         }
+
+        @Test
+        fun `don't insert period after colon`()
+        {
+            val input = "See: Good."
+            val output = input
+
+            val split = doc_splitter.splitLine(input)
+            val result = punctuation_processor.run(split)
+
+            assertEquals(output, result.toString())
+        }
     }
 
 
@@ -147,6 +159,18 @@ class PunctuationProcessorTest
         fun `don't insert comma after ellipsis`()
         {
             val input = "I'm… done."
+            val output = input
+
+            val split = doc_splitter.splitLine(input)
+            val result = punctuation_processor.run(split)
+
+            assertEquals(output, result.toString())
+        }
+
+        @Test
+        fun `don't insert comma after colon`()
+        {
+            val input = "see: good."
             val output = input
 
             val split = doc_splitter.splitLine(input)
