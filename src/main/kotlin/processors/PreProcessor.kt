@@ -12,7 +12,8 @@ class PreProcessor
 {
     fun run(doc: String): String
     {
-        return ellipsis(doc)
+        val doc = ellipsis(doc)
+        return ellipsisSeparation(doc)
     }
 
 
@@ -46,5 +47,12 @@ class PreProcessor
             .replace(" . . . !", "…!")     // 3A-E
             .replace(" . . .", "…")     // 3A
             .replace(". . .", "…")      // 3B
+    }
+
+    private fun ellipsisSeparation(input: String): String
+    {
+        return input
+            .replace("…“", "… “")
+            .replace(Regex("…([a-zA-Z])"), "… $1")
     }
 }
