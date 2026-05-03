@@ -72,6 +72,28 @@ class PreProcessorTest
             assertEquals(result, expected)
         }
 
+        @Test
+        fun `type 3A-Q spread ellipsis condensation`()
+        {
+            val value = "you . . . ?"
+            val expected = "you…?"
+
+            val result = preprocessor.run(value)
+
+            assertEquals(expected, result)
+        }
+
+        @Test
+        fun `type 3A-E spread ellipsis condensation`()
+        {
+            val value = "you . . . !"
+            val expected = "you…!"
+
+            val result = preprocessor.run(value)
+
+            assertEquals(expected, result)
+        }
+
 
         @Test
         fun `type 3B spread ellipsis condensation`()
