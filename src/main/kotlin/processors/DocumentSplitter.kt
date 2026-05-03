@@ -43,7 +43,8 @@ class DocumentSplitter
         '.',
         '?',
         '!',
-        '…'
+        '…',
+        ':'
     )
 
 
