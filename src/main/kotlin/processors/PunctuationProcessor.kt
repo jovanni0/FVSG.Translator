@@ -78,6 +78,11 @@ class PunctuationProcessor
             {
                 if (!is_ending_hint)
                 {
+                    if (word.tail.contains('…'))
+                    {
+                        return@forEachIndexed
+                    }
+
                     word.insertComma()
                 }
                 else if (speech_counter <= 1)
