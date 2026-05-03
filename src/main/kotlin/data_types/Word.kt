@@ -13,6 +13,12 @@ data class Word(
     }
 
 
+    fun isSpeechStart(): Boolean
+    {
+        return this.head.contains('“')
+    }
+
+
     fun isNameCase(): Boolean
     {
         return body.isNotEmpty() && body.any { it.isUpperCase() }

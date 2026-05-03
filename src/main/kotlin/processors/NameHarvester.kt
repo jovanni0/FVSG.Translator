@@ -74,7 +74,10 @@ class NameHarvester(
         val names = mutableSetOf<String>()
 
         sentence.words.forEachIndexed { index, word ->
-            if (index > 0 && word.isNameCase() && word.body.lowercase() !in not_names)
+            if (index > 0 &&
+                word.isNameCase() &&
+                !word.isSpeechStart() &&
+                word.body.lowercase() !in not_names)
             {
                 if (!word.is_sentence_start)
                 {
